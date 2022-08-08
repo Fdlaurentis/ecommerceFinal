@@ -23,7 +23,7 @@ export const getProductThunk = () => (dispatch) => {
 
 export const getFilterThunk = searchValue => (dispatch) => {
     dispatch(setIsLoading(true));
-    return axios.get(`https://ecommerce-api-react.herokuapp.com/api/v1//products?query=${searchValue}`)
+    return axios.get(`https://ecommerce-api-react.herokuapp.com/api/v1/products?query=${searchValue}`)
         .then(res => dispatch(setProducts(res.data.data.products)))
         .finally(() => dispatch(setIsLoading(false)));
 }

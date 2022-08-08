@@ -1,3 +1,8 @@
+.contHome{
+    display: flex;
+    gap: .5rem;   
+}
+
 .contFlex{
     display: flex;
     gap: 2rem;

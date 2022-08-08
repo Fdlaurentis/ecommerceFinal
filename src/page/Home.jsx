@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -11,47 +12,60 @@ const Home = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [searchValue, setSearchValue] = useState("")
-
-
+    const [categories, sertCategories] = useState([])
     const products = useSelector((state) => state.products)
 
 
     useEffect(() => {
         dispatch(getProductThunk())
+        axios.get('https://ecommerce-api-react.herokuapp.com/api/v1/products/categories')
+            .then(res => sertCategories(res.data.data.categories))
     }, [])
-    
-    const search=e=>{
+
+    const search = e => {
         e.preventDefault()
         dispatch(getFilterThunk(searchValue))
     }
 
     return (
         <div className='container my-5'>
-            <h1>Home</h1>
-            <form onSubmit={search}>
-                <input 
-                    type="text" 
-                    placeholder='Search for name'
-                    onChange={e=>setSearchValue(e.target.value)}
-                    value={searchValue}
-                />
-                <button>Search</button>
-            </form>
+            <div className='contHome' style={{justifyContent: 'space-evenly', alignItems:'center'}}>
+                <h1>Home</h1>
+                <form onSubmit={search}>
+                    <input
+                        type="text"
+                        placeholder='Search for name'
+                        onChange={e => setSearchValue(e.target.value)}
+                        value={searchValue}
+                    />
+                    <button>Search</button>
+                </form>
+            </div>
+            <div className='contHome'>
+                <div className='divfilter my-5'>
+                    <h3>Category</h3>
+                    {
+                        categories.map(category => (
+                            <div key={category.id}>{category.name}</div>
+                        ))
+                    }
+                </div>
 
-            <div className='contFlex my-5'>
-                {
-                    products.map(product => (
-                        < div className="card" style={{ width: "18rem", cursor: 'pointer' }} key={product.id} onClick={() => navigate(`/productdetails/${product.id}`)}>
-                            <div className='divImg'>
-                                <img src={product.productImgs[0]} className="card-img-top" />
+                <div className='contFlex my-5'>
+                    {
+                        products.map(product => (
+                            < div className="card" style={{ width: "18rem", cursor: 'pointer' }} key={product.id} onClick={() => navigate(`/productdetails/${product.id}`)}>
+                                <div className='divImg'>
+                                    <img src={product.productImgs[0]} className="card-img-top" />
+                                </div>
+                                <div className="card-body">
+                                    <h5 className="card-title">{product.title}</h5>
+                                    <p className="card-text">{product.description}</p>
+                                </div>
                             </div>
-                            <div className="card-body">
-                                <h5 className="card-title">{product.title}</h5>
-                                <p className="card-text">{product.description}</p>
-                            </div>
-                        </div>
-                    ))
-                }
+                        ))
+                    }
+                </div>
             </div>
         </div>
     );
