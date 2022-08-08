@@ -1,0 +1,26 @@
+.contFlex{
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.contFlex img{
+    height: 200px;
+    object-fit: contain;
+    padding: 10px;
+}
+
+.divImg{
+    width: 100%;
+    background: #fff;
+}
+
+.card{
+    text-align: center;
+}
+
+.card p{
+    text-align: justify;
+}
+
