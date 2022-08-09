@@ -41,7 +41,7 @@ const Home = () => {
                     <button>Search</button>
                 </form>
             </div>
-            <div className='contHome'>
+            <div className='contHomeBody'>
                 <div className='divfilter my-5'>
                     <h3>Category</h3>
                     <ul >
@@ -55,8 +55,7 @@ const Home = () => {
                                             dispatch(getFilterCategoryThunk(category.id))
                                             
                                         }
-                                    }
-                                    style={{cursor:'pointer'}}
+                                    }                                    
                                 >
                                     {category.name}
                                 </li>
