@@ -27,10 +27,12 @@ const Home = () => {
         dispatch(getFilterThunk(searchValue))
     }
 
+
     return (
         <div className='container my-5'>
             <div className='contHome' style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
                 <h1>Home</h1>
+
                 <form onSubmit={search}>
                     <input
                         type="text"
@@ -45,17 +47,15 @@ const Home = () => {
                 <div className='divfilter my-5'>
                     <h3>Category</h3>
                     <ul >
-                        <li>All Products</li>
-                        {                                            
+                        <li onClick={()=>{dispatch(getProductThunk())}}>All Products</li>
+                        {
                             categories.map(category => (
                                 <li
                                     key={category.id}
                                     onClick={() => {
-                                            console.log(category.id)
-                                            dispatch(getFilterCategoryThunk(category.id))
-                                            
-                                        }
-                                    }                                    
+                                        dispatch(getFilterCategoryThunk(category.id))
+                                    }
+                                    }
                                 >
                                     {category.name}
                                 </li>
@@ -67,9 +67,9 @@ const Home = () => {
                 <div className='contFlex my-5'>
                     {
                         products.map(product => (
-                            < div className="card" style={{ width: "18rem", cursor: 'pointer' }} key={product.id} onClick={() => navigate(`/productdetails/${product.id}`)}>
+                            < div className="card" style={{ width: "18rem", cursor: 'pointer', borderRadius: '1rem' }} key={product.id} onClick={() => navigate(`/productdetails/${product.id}`)}>
                                 <div className='divImg'>
-                                    <img src={product.productImgs[0]} className="card-img-top" />
+                                    <img src={product.productImgs[0]} className="card-img-top img-fluid" />
                                 </div>
                                 <div className="card-body">
                                     <h5 className="card-title">{product.title}</h5>

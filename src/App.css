@@ -1,3 +1,9 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 li {
     cursor: pointer;
     list-style: none;
@@ -11,7 +17,7 @@ li {
 .contHomeBody{
     display: flex;      
     flex-direction: column;  
-    text-align: center;
+    text-align: justify;    
 }
 
 .contFlex{
@@ -36,7 +42,7 @@ li {
 
 .divImg{
     width: 100%;
-    background: #fff;
+    border-bottom: 1px solid #f2efef;
 }
 
 .card{
@@ -47,11 +53,19 @@ li {
     text-align: justify;
 }
 
+i{
+    color: #216dc1;
+}
+
 @media screen and (min-width:550px) {
 
     .contHomeBody{
         display: flex;     
         flex-direction: row;   
+    }
+    .form-row{
+        display:'flex';
+        gap:'1rem';
     }
     
 }
