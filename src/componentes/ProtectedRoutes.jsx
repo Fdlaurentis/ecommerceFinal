@@ -1,4 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
+import swal from 'sweetalert'
 
 const ProtectedRoutes = () => {
 
@@ -6,6 +7,10 @@ const ProtectedRoutes = () => {
     if(token){
         return <Outlet />
     } else { 
+        swal({
+            title:"You must log in",
+            icon:"warning"
+        })
         return <Navigate to='/login' />
     }
 };   
