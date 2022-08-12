@@ -4,6 +4,7 @@ import { Button, Offcanvas } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import { buyCartThunk, getCartThunk } from '../store/slice/cart.slice';
 import emptyCart from '../image/emptyCart.png'
+import swal from 'sweetalert'
 
 const CartSideBar = ({ show, handleClose }) => {
 
@@ -21,6 +22,14 @@ const CartSideBar = ({ show, handleClose }) => {
         });
         return(total)
     }
+    const buyCart=()=>{
+        swal({
+            title:'Successful Purchase',
+            icon: "success"
+        })
+        dispatch(buyCartThunk())
+    }
+
     return (
         <Offcanvas show={show} onHide={handleClose} placement={'end'}>
             <Offcanvas.Header closeButton>
@@ -41,7 +50,7 @@ const CartSideBar = ({ show, handleClose }) => {
                 {cartLists.length >= 1 ? (
                  <>
                     <h4 style={{color:'red'}}>Total: {totalCal()}.00</h4>             
-                    < Button onClick={() => dispatch(buyCartThunk())}>Make a purchase</Button>
+                    < Button onClick={buyCart}>Make a purchase</Button>
                  </>   
 
                 ) : (
