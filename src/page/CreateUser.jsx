@@ -1,21 +1,38 @@
 import axios from 'axios';
 import React from 'react';
 import { useForm } from "react-hook-form"
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { loginThunk } from '../store/slice/login.slice';
 
 const CreateUser = () => {
 
+    const navigate=useNavigate()
+
     const { register, handleSubmit } = useForm()
+
+    const login=useSelector(state=>state.login)
+
+    const dispatch = useDispatch()
 
     const submit = data => {
 
+        console.log(data);
+        const userLogin={
+            email:data.email,
+            password:data.password
+        } 
+        console.log(userLogin);   
+        console.log(userLogin)
         axios.post('https://ecommerce-api-react.herokuapp.com/api/v1/users', data)
-            .then(res => {
-                navigate('/')
-                localStorage.setItem('token', res.data.data.token)
-            })
-            .catch(error=>console.log(error.response))     
-    }
+            .then(()=>dispatch(loginThunk(userLogin)))
+            .then(()=>navigate('/'))
+            .catch(error => console.log(error.response))
 
+
+        
+    }
+    
     return (
         <div className='container my-5'>
             <form onSubmit={handleSubmit(submit)}>
