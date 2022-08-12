@@ -15,14 +15,11 @@ const CreateUser = () => {
 
     const dispatch = useDispatch()
 
-    const submit = data => {
-
-        console.log(data);
+    const submit = data => {        
         const userLogin={
             email:data.email,
             password:data.password
         } 
-        console.log(userLogin);   
         console.log(userLogin)
         axios.post('https://ecommerce-api-react.herokuapp.com/api/v1/users', data)
             .then(()=>dispatch(loginThunk(userLogin)))
